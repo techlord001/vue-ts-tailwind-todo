@@ -6,6 +6,7 @@
             <li v-for="task in tasks" :key="task.id" :class="{ 'completed': task.completed }">
                 {{ task.title }}
                 <input type="checkbox" v-model="task.completed">
+                <button class="delete-button ml-2" @click="deleteTask(task)">X</button>
             </li>
         </ul>
     </div>
@@ -36,11 +37,18 @@ export default defineComponent({
             }
         };
 
+        const deleteTask = (task: Task) => {
+            const index = tasks.value.indexOf(task);
+            if (index !== -1) {
+                tasks.value.splice(index, 1);
+            }
+        };
+
         const toggleCompletion = (task: Task) => {
             task.completed = !task.completed;
         };
 
-        return { tasks, newTask, addTask, toggleCompletion };
+        return { tasks, newTask, addTask, deleteTask, toggleCompletion };
     },
 });
 </script>
@@ -55,7 +63,10 @@ export default defineComponent({
 }
 
 .completed {
-    text-decoration: line-through;
-    color: gray;
+    @apply line-through text-gray-500;
+}
+
+.delete-button {
+    @apply bg-red-500 text-white rounded w-5 h-5 text-center text-sm cursor-pointer;
 }
 </style>
