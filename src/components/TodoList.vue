@@ -21,7 +21,7 @@ interface Task {
 }
 
 export default defineComponent({
-    setup () {
+    setup() {
         const tasks = ref<Task[]>([]);
         const newTask = ref('');
 
@@ -56,5 +56,6 @@ export default defineComponent({
 
 .completed {
     text-decoration: line-through;
+    color: gray;
 }
 </style>
